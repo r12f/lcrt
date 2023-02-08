@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2021"
 authors = ["r12f <r12f.code@gmail.com>"]
 description = "A simple utility crate to help writing leetcode solutions in rust."
-readme = "../README.md"
 license = "Apache-2.0"
 keywords = ["leetcode", "utility"]
 categories = ["api-bindings"]
