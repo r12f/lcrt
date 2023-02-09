@@ -13,7 +13,12 @@ To use this library, please add the following into the dependencies in the `Carg
 [dependencies]
 lcrt-macro = "0.1"
 lcrt = "0.1"
+
+[dev-dependencies]
+lcrt = { version = "0.1", features = ["testing"] }
 ```
+
+> NOTE: The "testing" feature enables macros and utility functions for testing support. Those functions are placed after this feature in order to not mess up with the problem solving process.
 
 Then in your local library, in `lib.rs` file, please add the macro use as below.
 
@@ -48,6 +53,39 @@ mod p2_add_two_numbers {
             l2: Option<Box<ListNode>>,
         ) -> Option<Box<ListNode>> {
         }
+    }
+}
+```
+
+## Unit test support
+
+LCRT provides some utility functions below for writing tests locally. 
+
+- `lc_list!(1, 2, 3, ...)`: Creates a linked list as `Option<Box<LinkedList>>`. If no parameter is provided, it returns None.
+- `lc_list_assert_eq(list, (1, 2, 3, ...))`: Asserts 2 lists are equal. If second parameter is `()`, it asserts against None.
+
+Here is an example, to write test for lists:
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_2() {
+        lc_list_assert_eq!(Solution::add_two_numbers(lc_list!(), lc_list!()), ());
+        lc_list_assert_eq!(Solution::add_two_numbers(lc_list!(1), lc_list!()), (1));
+        lc_list_assert_eq!(Solution::add_two_numbers(lc_list!(1), lc_list!(1)), (2));
+
+        lc_list_assert_eq!(
+            Solution::add_two_numbers(lc_list!(2, 4, 3), lc_list!(5, 6, 4)),
+            (7, 0, 8)
+        );
+
+        lc_list_assert_eq!(
+            Solution::add_two_numbers(lc_list!(9, 9, 9, 9, 9, 9, 9), lc_list!(9, 9, 9, 9)),
+            (8, 9, 9, 9, 0, 0, 0, 1)
+        );
     }
 }
 ```
