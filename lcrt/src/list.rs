@@ -51,8 +51,7 @@ impl ListNode {
             return;
         }
 
-        assert!(!l1.is_none());
-        assert!(!l2.is_none());
+        assert_eq!(l1.is_none(), l2.is_none());
 
         let mut l1_node = l1.as_ref().unwrap();
         let mut l2_node = l2.as_ref().unwrap();
@@ -155,7 +154,7 @@ mod tests {
     }
 
     #[test]
-    fn list_node_assert_eq_can_check_identical_lists() {
+    fn list_node_assert_eq_can_pass_on_identical_lists() {
         ListNode::assert_eq(lc_list!(), lc_list!());
         ListNode::assert_eq(lc_list!(1), lc_list!(1));
         ListNode::assert_eq(lc_list!(1, 2, 3), lc_list!(1, 2, 3));
