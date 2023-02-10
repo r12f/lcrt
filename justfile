@@ -7,7 +7,7 @@ COLOR_NONE := '(ansi reset)'
 
 set shell := ["nu", "-c"]
 
-build-all:
+build:
     cargo build
 
 test:
