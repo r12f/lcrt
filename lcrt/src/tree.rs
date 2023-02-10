@@ -205,9 +205,9 @@ macro_rules! lc_tree_assert_eq {
 ///
 /// Example:
 /// ```
-/// lc_tree_assert_eq(t, ""); // Check against None.
-/// lc_tree_assert_eq(t, "1,2,3"); // Check against list: 1->(2, 3).
-/// lc_tree_assert_eq(t, "1,null,2,3"); // Check against list: 1->(null, 2->(3, null)).
+/// lc_tree_assert_list_eq(t, ()); // Check against None.
+/// lc_tree_assert_list_eq(t, ("1,2,3")); // Check against list: 1->(2, 3).
+/// lc_tree_assert_list_eq(t, ("1,2", "1,null,2,3")); // Check against list: 1->(2), 1->(null, 2->(3, null)).
 /// ```
 #[cfg(feature = "testing")]
 #[macro_export]
