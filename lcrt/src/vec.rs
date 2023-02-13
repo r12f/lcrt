@@ -1,3 +1,9 @@
+/// Macro for generate a vector inside of a vector with vec-like syntax.
+///
+/// Example:
+/// ```
+/// lc_vecvec![[9], [3, 15], [20], [7]]; // This creates a Vec<Vec<i32>>.
+/// ```
 #[cfg(feature = "testing")]
 #[macro_export]
 macro_rules! lc_vecvec {

@@ -63,6 +63,10 @@ LCRT provides some utility functions below for writing tests locally.
 
 - `lc_list!(1, 2, 3, ...)`: Creates a linked list as `Option<Box<LinkedList>>`. If no parameter is provided, it returns None.
 - `lc_list_assert_eq(list, (1, 2, 3, ...))`: Asserts 2 lists are equal. If second parameter is `()`, it asserts against None.
+- `lc_tree!("1,null,2,3")`: Creates a tree as `Option<Rc<RefCell<TreeNode>>>`. For example, this creates `1->(null, 2->(3, null))`.
+- `lc_tree_assert_eq(t, "1,null,2,3")`: Asserts 2 trees are equal. If second parameter is `""`, it asserts against None.
+- `lc_tree_assert_list_eq(t, ("1,2", "1,null,2,3"))`: Asserts 2 tree lists are equal, ignoring order. For example, this checks against tree list: `1->(2), 1->(null, 2->(3, null))`.
+- `lc_vecvec![[9], [3, 15], [20], [7]]`: Creates a nested vector as `Vec<Vec<i32>>`.
 
 Here is an example, to write test for lists:
 
