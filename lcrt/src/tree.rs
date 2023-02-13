@@ -51,15 +51,15 @@ impl TreeNode {
         use std::collections::VecDeque;
 
         let values: Vec<Option<i32>> = raw_value
-            .split(",")
+            .split(',')
             .filter(|&x| !x.trim().is_empty())
             .map(|v| match v.trim() {
                 "null" => None,
-                v @ _ => Some(i32::from_str_radix(v, 10).unwrap()),
+                v => Some(i32::from_str_radix(v, 10).unwrap()),
             })
             .collect();
 
-        if values.len() == 0 {
+        if values.is_empty() {
             return None;
         }
 
@@ -93,7 +93,7 @@ impl TreeNode {
             }
         }
 
-        return Some(head);
+        Some(head)
     }
 
     #[cfg(feature = "testing")]
@@ -132,7 +132,7 @@ impl TreeNode {
         }
 
         result = result.trim_end_matches(',').to_string();
-        return result;
+        result
     }
 
     /// Asserts 2 trees are equal.
