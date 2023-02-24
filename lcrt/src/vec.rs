@@ -26,8 +26,23 @@ macro_rules! lc_vecvec {
     };
 }
 
+/// Macro for generate a vector of lists with vec-like syntax.
+///
+/// Example:
+/// ```
+/// lc_listvec![[9], [3, 15], [20], [7]]; // This creates a Vec<Vec<i32>>.
+/// ```
+#[cfg(feature = "testing")]
+#[macro_export]
+macro_rules! lc_listvec {
+    ($($e:tt),*) => {
+        vec![$(lcrt::lc_list!$e),*]
+    };
+}
+
 #[cfg(test)]
 mod tests {
+    use crate::*;
     use pretty_assertions::assert_eq;
 
     #[test]
@@ -50,5 +65,19 @@ mod tests {
     fn lc_vecvec_macro_can_generate_vec_vec() {
         let l = lc_vecvec![[9], [3, 15], [20], [7]];
         assert_eq!(l, vec![vec![9], vec![3, 15], vec![20], vec![7]]);
+    }
+
+    #[test]
+    fn lc_vecvec_macro_can_generate_list_vec() {
+        let l = lc_listvec![[9], [3, 15], [20], [7]];
+        assert_eq!(
+            l,
+            vec![
+                lcrt::lc_list![9],
+                lcrt::lc_list![3, 15],
+                lcrt::lc_list![20],
+                lcrt::lc_list![7]
+            ]
+        );
     }
 }
