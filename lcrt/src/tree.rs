@@ -50,7 +50,8 @@ impl TreeNode {
     pub fn from_str(raw_value: &str) -> Option<Rc<RefCell<TreeNode>>> {
         use std::collections::VecDeque;
 
-        let values: Vec<Option<i32>> = raw_value
+        let trimed_raw_value = raw_value.trim_matches(|c| c == '[' || c == ']');
+        let values: Vec<Option<i32>> = trimed_raw_value
             .split(',')
             .filter(|&x| !x.trim().is_empty())
             .map(|v| match v.trim() {
