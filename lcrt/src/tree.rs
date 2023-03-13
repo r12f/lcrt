@@ -136,6 +136,28 @@ impl TreeNode {
         result
     }
 
+    // Get child node by value
+    #[cfg(feature = "testing")]
+    pub fn get_child(
+        self_: &Option<Rc<RefCell<TreeNode>>>,
+        val: i32,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
+        match self_ {
+            None => None,
+            Some(self_) => {
+                if self_.borrow().val == val {
+                    return Some(self_.clone());
+                }
+
+                if let Some(left_result) = Self::get_child(&self_.borrow().left, val) {
+                    return Some(left_result);
+                }
+
+                Self::get_child(&self_.borrow().right, val)
+            }
+        }
+    }
+
     /// Asserts 2 trees are equal.
     #[cfg(feature = "testing")]
     pub fn assert_eq(t1: Option<Rc<RefCell<TreeNode>>>, t2: Option<Rc<RefCell<TreeNode>>>) {
@@ -250,6 +272,15 @@ mod tests {
         assert_eq!(trc2.val, 3);
         assert!(trc2.left.is_none());
         assert!(trc2.right.is_none());
+    }
+
+    #[test]
+    fn tree_node_get_child_can_return_child_by_val() {
+        let tree = lc_tree!("[3,5,1,6,2,0,8,null,null,7,4]");
+        assert_eq!(3, TreeNode::get_child(&tree, 3).unwrap().borrow().val);
+        assert_eq!(5, TreeNode::get_child(&tree, 5).unwrap().borrow().val);
+        assert_eq!(7, TreeNode::get_child(&tree, 7).unwrap().borrow().val);
+        assert_eq!(4, TreeNode::get_child(&tree, 4).unwrap().borrow().val);
     }
 
     #[test]
