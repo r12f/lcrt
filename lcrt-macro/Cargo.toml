@@ -16,12 +16,12 @@ exclude = [
 proc-macro = true
 
 [dependencies]
-syn = "1.0"
-quote = "1.0"
-proc-macro2 = "1.0.50"
-darling = "0.14.3"
-thiserror = "1.0.38"
+syn = "1"
+quote = "1"
+proc-macro2 = "1"
+darling = "0.14"
+thiserror = "1"
 
 [dev-dependencies]
-pretty_assertions = "1.3.0"
-prettyplease = "0.1.23"
+pretty_assertions = "1.3"
+prettyplease = "0.1"
